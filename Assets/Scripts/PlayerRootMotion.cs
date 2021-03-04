@@ -1,4 +1,4 @@
-//TODO: Create new scripts to seperate data and hold different types of data, handle new scripts
+
 
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class PlayerRootMotion : MonoBehaviour
 
     private Animator anim;
     private CharacterController controller;
+    public Weapon weapon;
 
     // OnLoad, connect Components to Variables
     private void Awake()
@@ -53,5 +54,27 @@ public class PlayerRootMotion : MonoBehaviour
                 anim.SetBool("Crouch", false);
             }
         }
+
+        // Controls for firing bullet
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("beforeCALL");
+            weapon.FireBullet();
+            Debug.Log("afterCALL");
+        }
+    }
+
+    // animator for IK
+    private void OnAnimatorIK(int layerIndex)
+    {
+        anim.SetIKPosition(AvatarIKGoal.LeftHand, weapon.leftHandPoint.position);
+        anim.SetIKPosition(AvatarIKGoal.RightHand, weapon.rightHandPoint.position);
+        anim.SetIKRotation(AvatarIKGoal.LeftHand, weapon.leftHandPoint.rotation);
+        anim.SetIKRotation(AvatarIKGoal.RightHand, weapon.rightHandPoint.rotation);
+
+        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
+        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
+        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
+        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f); 
     }
 }

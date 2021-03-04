@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HealthPickup
+  - weapon
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
